@@ -1,0 +1,13 @@
+server {
+    listen 8080;
+    listen [::]:8080;
+
+    server_name w1;
+    root /var/www/html;
+    index index.html index.htm;
+
+    location / {
+     add_header Host w1.example.test;
+     try_files $uri $uri/ =404;
+    }
+}
