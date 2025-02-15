@@ -212,6 +212,16 @@ Verifica que la cabecera `Host` aparece en la respuesta.
 ![web/index.html](capturas/web/index.html.png)
 ![web/logs](capturas/web/logs.png)
 
+### Comprobacion
+
+![comprobacion/install-firefox](capturas/comprobacion/install-firefox.png)
+![comprobacion/cache-desactivada](capturas/comprobacion/cache-desactivada.png)
+![comprobacion/w1.example.test](capturas/comprobacion/w1.example.test.png)
+![comprobacion/cabecera-host-192.168.57.10](capturas/comprobacion/cabecera-host-192.168.57.10.png)
+![comprobacion/nip-io](capturas/comprobacion/nip-io.png)
+![comprobacion/cabecera-ismaelmanzano](capturas/comprobacion/cabecera-ismaelmanzano.png)
+![comprobacion/xfriend-ismaelmanzano](capturas/comprobacion/xfriend-ismaelmanzano.png)
+
 ## Instrucciones para Levantar el Entorno
 
 1. Clona este repositorio.
