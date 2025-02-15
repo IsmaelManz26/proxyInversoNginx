@@ -189,7 +189,7 @@ Verifica que la cabecera `Host` aparece en la respuesta.
 
 ### Acceso a http://192.168.57.11:8080/
 
-![192.168.57.11:8080](capturas/192.168.57.11:8080.png)
+![192.168.57.11:8080](capturas/192.168.57.11.8080.png)
 
 ### Acceso a http://www.example.test/
 
