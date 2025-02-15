@@ -219,3 +219,188 @@ Verifica que la cabecera `Host` aparece en la respuesta.
 3. Ejecuta `vagrant up` para levantar las máquinas virtuales.
 4. Accede a `http://192.168.57.11:8080/` y `http://www.example.test/` desde tu navegador.
 5. ¡Y eso es todo! Ahora tienes un entorno de desarrollo con un servidor proxy inverso configurado con Vagrant y Nginx.
+
+## Configuración de Proxy Inverso con Docker y Nginx
+
+Este proyecto también se puede configurar utilizando Docker, creando un entorno de desarrollo con un servidor proxy inverso utilizando Nginx. El entorno consta de dos contenedores: `proxy` y `web`.
+
+### Estructura del Proyecto
+
+```
+docker/
+proxy/
+  Dockerfile
+  default
+web/
+  Dockerfile
+  app.py
+  requirements.txt
+  nginx.conf
+  index.html
+docker-compose.yml
+```
+
+### Configuración del `docker-compose.yml`
+
+El archivo `docker-compose.yml` define dos servicios: `proxy` y `web`. Aquí está el contenido del archivo:
+
+```yaml
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: ./web
+    container_name: web
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+  proxy:
+    build:
+      context: ./proxy
+    container_name: proxy
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+```
+
+### Configuración del Servidor Proxy
+
+El archivo de configuración del servidor proxy se encuentra en `default`:
+
+```nginx
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name example.test www.example.test;
+
+    location / {
+        proxy_pass http://web:8080;  # Redirige al contenedor 'web'
+    }
+}
+```
+
+El archivo `Dockerfile` para el servidor proxy se encuentra en `Dockerfile`:
+
+```dockerfile
+# Usar la imagen oficial de Nginx
+FROM nginx:latest
+
+# Copiar el archivo de configuración para el proxy
+COPY ./default /etc/nginx/sites-available/default
+
+# Exponer el puerto 80
+EXPOSE 80
+```
+
+### Configuración del Servidor Web
+
+El archivo de configuración del servidor web se encuentra en `default`:
+
+```nginx
+server {
+    listen 8080;
+    listen [::]:8080;
+
+    server_name w1;
+    root /var/www/html;
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
+```
+
+El archivo `Dockerfile` para el servidor web se encuentra en `Dockerfile`:
+
+```dockerfile
+# Usar una imagen base de Python
+FROM python:3.9
+
+# Establecer el directorio de trabajo
+WORKDIR /app
+
+# Copiar los archivos de la aplicación al contenedor
+COPY . /app
+
+# Instalar las dependencias necesarias
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Exponer el puerto 5000 para Gunicorn
+EXPOSE 5000
+
+# Comando para ejecutar Gunicorn (servidor de la app)
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app:app"]
+```
+
+El contenido del archivo `index.html` es:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>example.test</title>
+  </head>
+  <body>
+    <h1>example.test</h1>
+    <h2>Bienvenido</h2>
+    <p>Servidor w1</p>
+  </body>
+</html>
+```
+
+El contenido del archivo `app.py` es:
+
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+El contenido del archivo `requirements.txt` es:
+
+```
+Flask
+gunicorn
+```
+
+### Capturas de Pantalla
+
+#### Archivo Hosts de la Máquina Anfitriona
+
+![hosts-maquinafisica](capturas/docker/hosts-docker.png)
+
+#### Docker Desktop
+
+![docker-container](capturas/docker/docker-container.png)
+
+![docker-images](capturas/docker/docker-images.png)
+
+![nginx](capturas/docker/nginx.png)
+
+### Instrucciones para Levantar el Entorno con Docker
+
+1. Clona este repositorio.
+2. Navega al directorio del proyecto.
+3. Ejecuta `docker-compose up --build` para levantar los contenedores.
+4. Accede a `http://localhost:5000/` y `http://www.example.test/` desde tu navegador.
+5. ¡Y eso es todo! Ahora tienes un entorno de desarrollo con un servidor proxy inverso configurado con Docker y Nginx.
