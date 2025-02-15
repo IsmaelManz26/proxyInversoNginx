@@ -184,33 +184,56 @@ Verifica que la cabecera `Host` aparece en la respuesta.
 ## Capturas de Pantalla
 
 ### Configuración de Red en VirtualBox
-
-![Config-Red-Virtualbox](capturas/Config-Red-Virtualbox.png)
+![Config-Red-Virtualbox](capturas/Config-Red-Virtualbox.png)  
+*Descripción: Configuración de red en VirtualBox para las máquinas `proxy` y `web`.*
 
 ### Acceso a http://192.168.57.11:8080/
-
-![192.168.57.11:8080](capturas/192.168.57.11:8080.png)
+![192.168.57.11:8080](capturas/192.168.57.11.8080.png)  
+*Descripción: Acceso al servidor web en el puerto 8080.*
 
 ### Acceso a http://www.example.test/
-
-![example.test](capturas/example.test.png)
+![example.test](capturas/example.test.png)  
+*Descripción: Acceso al servidor proxy mediante el dominio `www.example.test`.*
 
 ### Archivo Hosts de la Máquina Anfitriona
-
-![hosts-maquinafisica](capturas/hosts-maquinafisica.png)
+![hosts-maquinafisica](capturas/hosts-maquinafisica.png)  
+*Descripción: Configuración del archivo `/etc/hosts` en la máquina anfitriona.*
 
 ### Configuración del Proxy
-
-![proxy/default](capturas/proxy/default.png)
-![proxy/etc-hosts](capturas/proxy/etc-hosts.png)
-![proxy/logs](capturas/proxy/logs.png)
+![proxy/default](capturas/proxy/default.png)  
+*Descripción: Configuración del servidor proxy en el archivo `default` del directorio `proxy`.*  
+![proxy/etc-hosts](capturas/proxy/etc-hosts.png)  
+*Descripción: Archivo `/etc/hosts` en el servidor proxy para reconocer el nombre `w1`.*  
+![proxy/logs](capturas/proxy/logs.png)  
+*Descripción: Logs de acceso en el servidor proxy.*
 
 ### Configuración del Servidor Web
+![web/curl-localhost](capturas/web/curl-localhost.png)  
+*Descripción: Comprobación del acceso al servidor web localmente mediante `curl`.*  
+![web/default](capturas/web/default.png)  
+*Descripción: Configuración del servidor web en el archivo `default` del directorio `web`.*  
+![web/index.html](capturas/web/index.html.png)  
+*Descripción: Contenido del archivo `index.html` en el servidor web.*  
+![web/logs](capturas/web/logs.png)  
+*Descripción: Logs de acceso en el servidor web.*
 
-![web/curl-localhost](capturas/web/curl-localhost.png)
-![web/default](capturas/web/default.png)
-![web/index.html](capturas/web/index.html)
-![web/logs](capturas/web/logs.png)
+### Comprobación
+![comprobacion/install-firefox](capturas/comprobacion/install-firefox.png)  
+*Descripción: Instalación de Firefox en la máquina anfitriona para comprobar las cabeceras.*  
+![comprobacion/cache-desactivada](capturas/comprobacion/cache-desactivada.png)  
+*Descripción: Desactivación de la caché en las herramientas de desarrollador de Firefox.*  
+![comprobacion/w1.example.test](capturas/comprobacion/w1.example.test.png)  
+*Descripción: Visualización de la petición hacia `w1.example.test` en Firefox.*  
+![comprobacion/cabecera-host-192.168.57.10](capturas/comprobacion/cabecera-host-192.168.57.10.png)  
+*Descripción: Cabecera Host enviada desde el navegador con dirección `192.168.57.10`.*  
+![comprobacion/nip-io](capturas/comprobacion/nip-io.png)  
+*Descripción: Visualización de la cabecera Host con el dominio `nip.io`.*  
+![comprobacion/cabecera-ismaelmanzano](capturas/comprobacion/cabecera-ismaelmanzano.png)  
+*Descripción: Cabecera personalizada `X-friend` enviada desde el servidor proxy.*  
+![comprobacion/xfriend-ismaelmanzano](capturas/comprobacion/xfriend-ismaelmanzano.png)  
+*Descripción: Cabecera `X-friend` mostrando el nombre `ismaelmanzano` en la respuesta del servidor web.*
+
+
 
 ## Instrucciones para Levantar el Entorno
 
