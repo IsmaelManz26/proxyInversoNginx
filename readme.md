@@ -209,7 +209,7 @@ Verifica que la cabecera `Host` aparece en la respuesta.
 
 ![web/curl-localhost](capturas/web/curl-localhost.png)
 ![web/default](capturas/web/default.png)
-![web/index.html](capturas/web/index.html)
+![web/index.html](capturas/web/index.html.png)
 ![web/logs](capturas/web/logs.png)
 
 ## Instrucciones para Levantar el Entorno
